@@ -109,7 +109,7 @@ On ios:
 Copy the fastlane files from this example to your app. For example
 
     cd <location of this app>
-    tar cf - fastlane android/fastlane ios/fastlane script .gitignore | ( cd <localation of new project>; tar xf -)
+    tar cf - fastlane android/fastlane ios/fastlane script .gitignore .travis.yml .gitlab-ci.yml| ( cd <localation of new project>; tar xf -)
     
 and modify metadata to suit your needs.
 
@@ -324,6 +324,8 @@ the local `dev` branch.
 If your Apple ID under your Apple Developer Account has 2-factor authentication enabled, 
 you must create a new Apple ID without 2-factor authentication. This can be done using your
 existing Apple Developer account. See https://appstoreconnect.apple.com/access/users.
+
+You may have to sync your account on Travis and enable the GitHub repo. See: https://travis-ci.org/account/repositories
 
 Add the following secret variables to your preferred build server (Travis, or GitLab, etc... ):
 
