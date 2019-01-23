@@ -109,7 +109,7 @@ On ios:
 Copy the fastlane files from this example to your app. For example
 
     cd <location of this app>
-    tar cf - fastlane android/fastlane ios/fastlane script .gitignore .travis.yml .gitlab-ci.yml Gemfile*| ( cd <localation of new project>; tar xf -)
+    tar cf - fastlane android/fastlane ios/fastlane script .gitignore .travis.yml .gitlab-ci.yml Gemfile* | ( cd <location of new project>; tar xf -)
     
 and modify metadata to suit your needs.
 
@@ -160,24 +160,21 @@ app signing.
     
 2. Create the `android/key.properties`:
 
-
-    storePassword=<store password>
-    keyPassword=<key password>
-    keyAlias=key
-    storeFile=../key.jks
+        storePassword=<store password>
+        keyPassword=<key password>
+        keyAlias=key
+        storeFile=../key.jks
 
 Then encrypt them as follows:
 1. Add the following to your `.gitignore`:
 
-
-    **/android/key.properties
-    **/android/key.jks
+        **/android/key.properties
+        **/android/key.jks
     
 2. Encrypt both files with:
     
-    
-    openssl enc -aes-256-cbc -salt -in android/key.jks -out android/key.jks.enc -k $KEY_PASSWORD
-    openssl enc -aes-256-cbc -salt -in android/key.properties -out android/key.properties.enc -k $KEY_PASSWORD
+        openssl enc -aes-256-cbc -salt -in android/key.jks -out android/key.jks.enc -k $KEY_PASSWORD
+        openssl enc -aes-256-cbc -salt -in android/key.properties -out android/key.properties.enc -k $KEY_PASSWORD
 
 3. Enable android release builds in `android/app/build.gradle`:
     
