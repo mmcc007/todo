@@ -34,7 +34,7 @@ lane :release_notes do |options|
       get_build_name_and_build_number
       puts "build number = '#{@build_number}'"
       #File.write("metadata/android/en-US/changelogs/#{@build_number}.txt", "#{changelog}")
-      f = File.new("ewfile"/android/en-US/changelogs/#{@build_number}.txt,  "w+")
+      f = File.new("/android/en-US/changelogs/#{@build_number}.txt",  "w+")
       f.write("metadata/android/en-US/changelogs/#{@build_number}.txt", "#{changelog}")
     else
       File.write("metadata/en-US/release_notes.txt", "#{changelog}")

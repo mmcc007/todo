@@ -95,6 +95,7 @@ jobs:
     - stage: Start Beta
 #      os: trusty
       env: Deploy beta to Android testers
+      language: generic
       before_install:
         - ANDROID_COMPILE_SDK=28
         - ANDROID_BUILD_TOOLS=28.0.1
