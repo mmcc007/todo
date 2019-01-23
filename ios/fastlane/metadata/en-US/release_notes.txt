@@ -1,0 +1,21 @@
+Installed cocoapods
+Installed cocoapods
+Fixed ruby syntax error
+Fixed path to flutter
+Remove more output from flutter download
+Remove output from flutter download
+Corrected download link for flutter
+Corrected download link for flutter
+Corrected download link for flutter
+Changed from .tar to .zip
+Changed link to flutter download
+Remove output of sdkmanager
+Install fixed version of Android SDK and Flutter
+Added missing SDK to android SDK
+Added flutter doctor
+Initial Commit
+Removed flutter_architecture_examples submodule
+Get packages before build
+Run fastlane in dev
+Fixed build on new tag
+Fixed build on new tag
