@@ -309,6 +309,9 @@ Assuming you have an empty remote repo:
     git checkout -b dev
 
 3. Push your local repo to the remote repo.
+
+    git push --set-upstream origin dev
+
 4. On the repo server, it is recommended to set the `master` branch to protected and `dev` as the default branch. This is to prevent accidental manual pushes to the `master` branch.
 
 After this point
