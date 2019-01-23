@@ -109,7 +109,7 @@ On ios:
 Copy the fastlane files from this example to your app. For example
 
     cd <location of this app>
-    tar cf - fastlane android/fastlane ios/fastlane script .gitignore .travis.yml .gitlab-ci.yml| ( cd <localation of new project>; tar xf -)
+    tar cf - fastlane android/fastlane ios/fastlane script .gitignore .travis.yml .gitlab-ci.yml Gemfile*| ( cd <localation of new project>; tar xf -)
     
 and modify metadata to suit your needs.
 
