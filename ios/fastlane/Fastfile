@@ -37,7 +37,7 @@ platform :ios do
     # cannot find pod??
     #sh ("which pod && pod --version")
     #sh ("cd .. && pod install")
-    cocoapods
+    #cocoapods
 
     sh ("cd ../.. && flutter build ios --release --no-codesign --build-name=$BUILD_NAME --build-number=$BUILD_NUMBER")
   end
