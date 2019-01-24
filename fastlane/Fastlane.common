@@ -33,10 +33,10 @@ lane :release_notes do |options|
     if options[:OS]=="android"
       get_build_name_and_build_number
       puts "build number = '#{@build_number}'"
-      #File.write("metadata/android/en-US/changelogs/#{@build_number}.txt", "#{changelog}")
-      filename="#{Dir.pwd}/metadata/android/en-US/changelogs/#{@build_number}.txt"
-      f = File.new(filename,  "w")
-      f.write(filename, "#{changelog}")
+      File.write("metadata/android/en-US/changelogs/#{@build_number}.txt", "#{changelog}")
+      #filename="#{Dir.pwd}/metadata/android/en-US/changelogs/#{@build_number}.txt"
+      #f = File.new(filename,  "w")
+      #f.write(filename, "#{changelog}")
     else
       File.write("metadata/en-US/release_notes.txt", "#{changelog}")
     end
