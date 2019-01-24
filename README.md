@@ -67,6 +67,8 @@ project code. For example:
     cd <my project>
     cp -r lib test test_driver pubspec.yaml <location of new project>/todo
 
+This is to avoid problems with auto-incrementing the version name for older projects.
+
 To enable CICD-managed revision control comment out the `version` in pubspec.yaml
 
     # version: 1.0.0+1
