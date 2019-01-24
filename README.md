@@ -5,6 +5,30 @@ Release: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=master)]
 
 This is a slightly opinionated approach to CICD that seems to match well with flutter.
 
+Table of Contents
+=================
+
+   * [CICD for Flutter](#cicd-for-flutter)
+   * [Implementation](#implementation)
+   * [Setup](#setup)
+      * [Application Setup](#application-setup)
+      * [Fastlane setup](#fastlane-setup)
+      * [Android App Store Connect setup](#android-app-store-connect-setup)
+         * [Create new app in store](#create-new-app-in-store)
+         * [Sign android app](#sign-android-app)
+         * [Upload first apk](#upload-first-apk)
+      * [App Store Connect setup](#app-store-connect-setup)
+         * [Sign ios app](#sign-ios-app)
+         * [Create required images](#create-required-images)
+      * [Repo server setup](#repo-server-setup)
+      * [Build server setup](#build-server-setup)
+      * [Local repo setup](#local-repo-setup)
+   * [Usage](#usage)
+      * [Starting a beta](#starting-a-beta)
+      * [Release to both stores](#release-to-both-stores)
+   * [Issues and Pull Requests](#issues-and-pull-requests)
+   * [Todo example](#todo-example)
+   
 The idea is to do all development in a `dev` branch and when ready for beta, do a beta release
 to both `Google Play Console` and `App Store Connect`. 
 
@@ -25,31 +49,6 @@ required.
 
 Information about the build can be displayed in an About section of the shipped app for support
 and bug fixing.
-
-Table of Contents
-=================
-
-   * [CICD for Flutter](#cicd-for-flutter)
-   * [Implementation](#implementation)
-   * [Setup](#setup)
-      * [Application Setup](#application-setup)
-   * [version: 1.0.0 1](#version-1001)
-      * [Fastlane setup](#fastlane-setup)
-      * [Android App Store Connect setup](#android-app-store-connect-setup)
-         * [Create new app in store](#create-new-app-in-store)
-         * [Sign android app](#sign-android-app)
-         * [Upload first apk](#upload-first-apk)
-      * [App Store Connect setup](#app-store-connect-setup)
-         * [Sign ios app](#sign-ios-app)
-         * [Create required images](#create-required-images)
-      * [Repo server setup](#repo-server-setup)
-      * [Build server setup](#build-server-setup)
-      * [Local repo setup](#local-repo-setup)
-   * [Usage](#usage)
-      * [Starting a beta](#starting-a-beta)
-      * [Release to both stores](#release-to-both-stores)
-   * [Issues and Pull Requests](#issues-and-pull-requests)
-   * [Todo example](#todo-example)
    
 # Implementation
 

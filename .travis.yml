@@ -10,7 +10,7 @@ jobs:
 #      tag = true
       branches:
         only:
-          #- dev
+          - dev
           - /^(\d*).(\d*).(\d*)$/
 #        except:
 #          - dev
@@ -48,7 +48,7 @@ jobs:
 #      if: branch = dev AND tag = true
       branches:
         only:
-          #- dev
+          - dev
           - /^(\d*).(\d*).(\d*)$/
 #        except:
 #          - dev
