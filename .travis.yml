@@ -10,9 +10,10 @@ jobs:
 #      tag = true
       branches:
         only:
-          - dev
+          #- dev
           - /^(\d*).(\d*).(\d*)$/
         except:
+          - dev
           - master
       os: osx
 #      osx_image: xcode8.0
@@ -47,9 +48,10 @@ jobs:
 #      if: branch = dev AND tag = true
       branches:
         only:
-          - dev
+          #- dev
           - /^(\d*).(\d*).(\d*)$/
         except:
+          - dev
           - master
 #      os: trusty
       env: Deploy beta to android testers
