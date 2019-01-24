@@ -26,7 +26,15 @@ required.
     build server records the commit ID used in the build next to the build number.
 4. The app name, version name, and build number can be displayed in an About section of the shipped 
 app for support and bug fixing. These values will be the same on both android and ios.
+5. As an additional bonus, a beta can be started and the apps released to both stores in as long 
+as it takes the build server to run. This can be as fast as 15 minutes (not including Apple's 
+review time).
 
+A by-product of this is that, if your build server supports macs, a development mac is not 
+required (except perhaps for setting-up match and for [screenshots](https://pub.dartlang.org/packages/screenshots)). Development can be done 
+on Windows or Linux. The build server will take care of the ios-specific details of 
+building the ios app, starting the ios beta and release to `Apple Store`.
+ 
 Table of Contents
 =================
 
