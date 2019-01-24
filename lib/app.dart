@@ -70,6 +70,7 @@ class VanillaAppState extends State<VanillaApp> {
           );
         },
       },
+      debugShowCheckedModeBanner: false,
     );
   }
 
