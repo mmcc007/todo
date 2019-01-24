@@ -5,6 +5,27 @@ Release: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=master)]
 
 This is a slightly opinionated approach to CICD that seems to match well with flutter.
 
+The idea is to do all development in a `dev` branch and when ready for beta, do a beta release
+to both `Google Play Console` and `App Store Connect`. 
+
+Each time a new beta is ready, a 'start beta' command is issued and a new beta is started 
+and automatically released to testers.
+
+Then when ready for general release, a 'release' command is issued and the `dev` branch is automatically 
+merged with the `master` branch and the release is uploaded to the `Apple Store` and the 
+Google `Play Store`.
+
+In this way it is guaranteed that:
+ 1. An app built for iOS and Android always has the same version name
+and build number. 
+2. The build used to pass beta testing is the same build that is shipped to the stores. No rebuild
+required.
+3. Using the version name (or the build number), it is always possible to trace back to the source used in the build.
+    (The build server always records the commit ID used in the build).
+
+Information about the build can be displayed in an About section of the shipped app for support
+and bug fixing.
+
 Table of Contents
 =================
 
@@ -28,27 +49,6 @@ Table of Contents
       * [Release to both stores](#release-to-both-stores)
    * [Issues and Pull Requests](#issues-and-pull-requests)
    * [Todo example](#todo-example)
-   
-The idea is to do all development in a `dev` branch and when ready for beta, do a beta release
-to both `Google Play Console` and `App Store Connect`. 
-
-Each time a new beta is ready, a 'start beta' command is issued and a new beta is started 
-and automatically released to testers.
-
-Then when ready for general release, a 'release' command is issued and the `dev` branch is automatically 
-merged with the `master` branch and the release is uploaded to the `Apple Store` and the 
-Google `Play Store`.
-
-In this way it is guaranteed that:
- 1. An app built for iOS and Android always has the same version name
-and build number. 
-2. The build used to pass beta testing is the same build that is shipped to the stores. No rebuild
-required.
-3. Using the version name (or the build number), it is always possible to trace back to the source used in the build.
-    (The build server always records the commit ID used in the build).
-
-Information about the build can be displayed in an About section of the shipped app for support
-and bug fixing.
    
 # Implementation
 
