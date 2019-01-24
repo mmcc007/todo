@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=dev)](https://travis-ci.org/mmcc007/todo)
-[![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=master)](https://travis-ci.org/mmcc007/todo)
+Beta: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=dev)](https://travis-ci.org/mmcc007/todo)
+Release: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=master)](https://travis-ci.org/mmcc007/todo)
 
 #  CICD for Flutter
 

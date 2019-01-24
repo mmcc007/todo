@@ -37,8 +37,7 @@ jobs:
       script:
         # fail on error
 #        - set -e
-        - cd ios
-        - bundle exec fastlane beta
+        - (cd ios && bundle exec fastlane beta)
 
 
     # start android beta
@@ -86,10 +85,7 @@ jobs:
         # fail on error
 #        - set -e
 
-        - cd android
-        - openssl enc -aes-256-cbc -d -in key.properties.enc -out key.properties -k $KEY_PASSWORD
-        - openssl enc -aes-256-cbc -d -in key.jks.enc -out key.jks -k $KEY_PASSWORD
-        - bundle exec fastlane beta
+        - (cd android && openssl enc -aes-256-cbc -d -in key.properties.enc -out key.properties -k $KEY_PASSWORD && openssl enc -aes-256-cbc -d -in key.jks.enc -out key.jks -k $KEY_PASSWORD && bundle exec fastlane beta)
 
 
 
@@ -107,7 +103,4 @@ jobs:
         # fail on error
 #        - set -e
 
-        - cd android
-        - bundle exec fastlane release
-        - cd ../ios
-        - bundle exec fastlane release
+        - (cd android && bundle exec fastlane release && cd ../ios && bundle exec fastlane release)
