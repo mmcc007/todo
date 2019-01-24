@@ -1,1 +1,1 @@
-A flutter counter app
+A simple todo app

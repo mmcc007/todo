@@ -115,7 +115,7 @@ On ios:
         tar cf - fastlane android/fastlane ios/fastlane script .gitignore .travis.yml .gitlab-ci.yml Gemfile* | ( cd <location of new project>; tar xfp -)
     
 2. Modify metadata to suit your needs.
-    This includes changing contact information for both android and ios, changing the name of the app for android, and may other things.
+    This includes changing contact information for both android and ios, changing the name of the app for android and ios, and may other things.
 
 3. Update the `package_name` in `ios/fastlane/Appfile` and `android/fastlane/Appfile` to your 
 application ID. For example:
