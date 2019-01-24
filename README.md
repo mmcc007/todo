@@ -3,9 +3,14 @@ Release: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=master)]
 
 #  CICD for Flutter
 
-This is a slightly opinionated approach to CICD that seems to match well with flutter.
+CICD is 'Continous Interation and Continous Delivery'. It is the idea of allowing developers
+to focus on developing and reducing time spent on repetitive tasks, such as testing and delivery
+thru automation. For more details see ([CICD](https://en.wikipedia.org/wiki/CI/CD)).
 
-The idea is to do all development in a `dev` branch and when ready for beta, do a beta release
+This is a slightly opinionated approach to CICD that seems to match well with Flutter.
+
+The idea of this implementation of CICD is to do all development in a `dev` branch and when 
+ready for beta, do a beta release
 to both `Google Play Console` and `App Store Connect`. 
 
 Each time a new beta is ready, a 'start beta' command is issued and a new beta is started 
@@ -42,7 +47,7 @@ Table of Contents
    * [Table of Contents](#table-of-contents)
    * [Implementation](#implementation)
    * [Setup](#setup)
-      * [Application Setup](#application-setup)
+      * [Application setup](#application-setup)
       * [Fastlane setup](#fastlane-setup)
       * [Android App Store Connect setup](#android-app-store-connect-setup)
          * [Create new app in store](#create-new-app-in-store)
@@ -57,6 +62,7 @@ Table of Contents
    * [Usage](#usage)
       * [Starting a beta for both android and ios](#starting-a-beta-for-both-android-and-ios)
       * [Release to both stores](#release-to-both-stores)
+   * [The CI part of CICD](#the-ci-part-of-cicd)
    * [Issues and Pull Requests](#issues-and-pull-requests)
    * [Todo example](#todo-example)
    
@@ -67,7 +73,7 @@ a build server and fastlane.
 
 1. Repository Server    
     The repository server can run any git server, such as GitHub, GitLab, etc. The git tag, in 
-     [semver](https://semver.org/) format, is used as the verion name.
+     [semver](https://semver.org/) format, is used as the version name.
 2. Build Server    
     The build server can be provided by Travis, Cirrus, an internal server running GitLab, Jenkins, etc.. The build server
     should provide a method to get the build number. The build number is used to ensure the release in
@@ -92,7 +98,7 @@ all these steps into one place and add some automation!
 
 If you want to do beta testing and releases on demand, it is well worth the effort!
 
-## Application Setup
+## Application setup
 
 Decide on an application ID for your app that is unique in both stores. For example, `com.mycompany.todo`. This will be used
 in several places to configure your app.
@@ -105,7 +111,8 @@ project code. For example:
     cd <my project>
     cp -r lib test test_driver pubspec.yaml <location of new project>/todo
 
-This is to avoid problems with auto-incrementing the version name for older projects.
+This is to avoid problems with auto-incrementing the version name for older projects, among
+other unforeseen problems.
 
 To enable CICD-managed version control comment out the `version` in pubspec.yaml
 
@@ -146,6 +153,9 @@ On ios:
         
     Note: if match is not already set-up you will have to return to this step after match is set-up.
 
+Note: if not on a mac, these changes can be made directly in the ios config files. This process
+is not currently documented in this README.
+
 ## Fastlane setup
 1. Copy the fastlane files from this example to your app. For example
 
@@ -153,6 +163,7 @@ On ios:
         tar cf - fastlane android/fastlane ios/fastlane script .gitignore .travis.yml .gitlab-ci.yml Gemfile* | ( cd <location of new project>; tar xf -)
     
 2. Modify metadata to suit your needs.
+
     This includes changing contact information for both android and ios, changing the name of 
     the app for android and ios (for example, using `MyUniqueAppName`), and may other things.
 
@@ -178,7 +189,7 @@ can be uploaded automatically. Therefore, you should take the following steps:
 
 4. Provide additional required information `Short Description`, `Long Description`, screenshots, etc...
 
-    For icon generation try https://iconsflow.com/, https://makeappicon.com/, https://pub.dartlang.org/packages/flutter_launcher_icons
+    For icon generation try https://makeappicon.com/, https://pub.dartlang.org/packages/flutter_launcher_icons
     
     For auto screenshot generation see https://pub.dartlang.org/packages/screenshots
     
@@ -297,7 +308,7 @@ Configure a private match server from Fastlane.
 This requires access to a private repository. You can use a private GitHub repository or
 use a private repository from another repository provider, or provide your own.
     
-For information on how to set-up a match private repo see: https://docs.fastlane.tools/actions/match
+For information on how to set-up a private repo for match see: https://docs.fastlane.tools/actions/match
 
 This CICD does not need the `Matchfile` created during match setup. However, it can be created
 temporarily to run the match setup.
@@ -327,7 +338,7 @@ temporarily to run the match setup.
     fastlane match appstore
     ````
     
-   Among other things, this will create a provisioning profile that is used during app setup above. For example, `match AppStore com.mycompany.todo`.
+   Among other things, this will create a provisioning profile that is used during app setup above. For example, `match AppStore com.mycompany.todo`. Go back to app setup to complete this step.
 4. Delete the Matchfile (as it contains secure info)
 
 ### Create required images
@@ -342,7 +353,8 @@ temporarily to run the match setup.
 2. Screenshots
 
     Screenshots must be included in upload. Screenshots can be generated automatically (for
-    both android and ios) using https://pub.dartlang.org/packages/screenshots.
+    both android and ios) using https://pub.dartlang.org/packages/screenshots. Alternatively
+    they can be generated manually.
 
 1. App Store Icon
 
@@ -354,7 +366,8 @@ temporarily to run the match setup.
     
 2. App Store Icon for iPad
 
-    Since flutter supports iPad a related app icon is required of exactly '167x167' pixels, in .png format for iOS versions supporting iPad Pro (which is all flutter apps).
+    Since flutter supports iPad, a related app icon is required of exactly '167x167' pixels, 
+    in .png format for iOS versions supporting iPad Pro (which is all flutter apps).
     
 ## Repo server setup
 Assuming you have an empty remote repo:
@@ -371,7 +384,7 @@ Assuming you have an empty remote repo:
 
 After this point
 the remote `master` should be protected and should never be pushed-to manually. There should never
-be a reason to even checkout the local `master` branch locally. All CICD git commands should be issued from
+be a reason to even checkout the local `master` branch locally. All CICD commands should be issued from
 the local `dev` branch.
 
 ## Build server setup
@@ -379,7 +392,8 @@ the local `dev` branch.
 If your Apple ID under your Apple Developer Account has 2-factor authentication enabled, 
 you must create a new Apple ID without 2-factor authentication. This can be done using your
 existing Apple Developer account. See https://appstoreconnect.apple.com/access/users. It should
-be set to have access to your app in `App Store Connect`.
+be set to have access to your app in `App Store Connect`. Log out and log back in to complete
+the setup of your new Apple ID.
 
 To complete the connection between Travis and GitHub, you may have to sync your account on Travis and enable the GitHub repo. See: https://travis-ci.org/account/repositories
 
@@ -458,9 +472,15 @@ trigger the build server to promote each build used in beta testing to a release
 The remote `master` now contains the most current code (the code used in the build that went thru
 beta testing). A rebuild of the beta-tested build is not required.
 
-# Issues and Pull Requests
-There are several possibilities for improvement. So feedback is welcome.
+# The CI part of CICD
+Only the CD (Continous Delivery) part of CICD is currently addressed here. For an example of the
+CI (Continous Integration) part, including unit and integration testing in the cloud, 
+see https://github.com/brianegan/flutter_architecture_samples. Unit testing would be relatively
+easy toadd to this setup. Integration testing involves adding emulators and simulators which 
+requires more setup.
 
+# Issues and Pull Requests
+There are several possibilities for improvement. The [happy path](https://en.wikipedia.org/wiki/Happy_path) is working and a few other things. So feedback is welcome.
 
 # Todo example
 
