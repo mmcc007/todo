@@ -93,7 +93,7 @@ On ios:
 
 1. Open Xcode. For example:
 
-    open ios/Runner.xcworkspace
+        open ios/Runner.xcworkspace
     
 1. Using XCode update the `Display Name` to the name the user will see.
 2. Using XCode update the `Bundle Identifier` to the same as the application id used on android, eg, 'com.mycompany.todo'.
@@ -110,16 +110,16 @@ On ios:
 ## Fastlane setup
 1. Copy the fastlane files from this example to your app. For example
 
-        cd <location of this app>
+        cd <location of this repo>
         tar cf - fastlane android/fastlane ios/fastlane script .gitignore .travis.yml .gitlab-ci.yml Gemfile* | ( cd <location of new project>; tar xfp -)
     
 2. Modify metadata to suit your needs.
-    This includes changing contact information for both android and ios, changing the name of the app for android, and may other things
+    This includes changing contact information for both android and ios, changing the name of the app for android, and may other things.
 
-Update the `package_name` in `ios/fastlane/Appfile` and `android/fastlane/Appfile` to your 
+3. Update the `package_name` in `ios/fastlane/Appfile` and `android/fastlane/Appfile` to your 
 application ID. For example:
  
-    package_name("com.mycompany.todo")
+        package_name("com.mycompany.todo")
 
 
 ## Android App Store Connect setup
@@ -142,24 +142,23 @@ can be uploaded automatically. Therefore, you should take the following steps:
 
 5. When all necessary information is provided, click on `Save Draft`. 
 
-### Sign app
+### Sign android app
 An android app requires signing. This is implemented using a private key that you generate yourself.
 It is important that you manage this private key carefully. For example, never check it into your
 repo.
 
 However, to automate the build, the CICD needs access to this private key. 
 This CICD expects to find a password protected encrypted version of the private key in the repo. The
-password to unencrypt the private key is provided in the `KEY_PASSWORD` described above.
+password to unencrypt the private key is provided in the `KEY_PASSWORD` described below.
 
 Follow the directions at https://developer.android.com/studio/publish/app-signing to learn about
 app signing.
  
 1. If you do not already have a keystore, generate a new keystore:
 
-
-    keytool -genkey -v -keystore android/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
-    keytool -importkeystore -srckeystore android/key.jks -destkeystore android/key.jks -deststoretype pkcs12
-    rm android/key.jks.old
+        keytool -genkey -v -keystore android/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
+        keytool -importkeystore -srckeystore android/key.jks -destkeystore android/key.jks -deststoretype pkcs12
+        rm android/key.jks.old
     
 2. Create the `android/key.properties`:
 
@@ -238,11 +237,12 @@ Upload the first apk manually (this is required so `App Store Connect` knows the
 1. Goto `App Releases` and open a beta track. Click on `Manage` and `Edit Release`
 2. Click on `Continue` to allow Google to manage app signing key
 3. Click on `Browse Files` to upload the current apk (built with `flutter build apk`) from `build/app/outputs/apk/release/app-release.apk`.
+4. Discard the beta track using the `Discard` button
 
 ## App Store Connect setup
 The equivalent steps for the android store have to be taken for the iOS store.
 
-### Sign app
+### Sign ios app
 Signing is done via Fastlane match.
 
 Configure a private match server from Fastlane.
@@ -253,21 +253,22 @@ use a private repository from another repository provider, or provide your own.
 For information on how to set-up a match private repo see: https://docs.fastlane.tools/actions/match
 
 This CICD does not need the `Matchfile` created during match setup. However, it can be created
-temporarily to run some match setup
-1. Initialize match. It will ask for the location and write access to the remote private match repo.
+temporarily to run the match setup.
+1. Initialize match. 
+    It will ask for the location and write access to the remote private match repo.
     
     ````
     fastlane match init
     ````
     
-2. Create your provisioning profile and app. You will have to pick a unique name for the app for 
-end users
+2. Create your provisioning profile and app. 
+    You will have to pick a unique name for the app for end users
 
     ````
     fastlane produce -u user@email.com -a com.mycompany.todo
     ````
     
-3. Sync the match repo with the app store
+3. Sync the match repo with the app store.
 
     ````
     fastlane match appstore
@@ -278,7 +279,6 @@ end users
 
 ### Create required images
 1. Icons
-
     Upload will fail if required icons are missing from the Asset Catalog. To generate a complete set
     of icons from a single image, see https://makeappicon.com. This will generate a complete Asset
     Catalog. Overwrite the existing catalog using:
@@ -286,19 +286,17 @@ end users
         cp <location of downloaded icons>/ios/AppIcon.appiconset/* ios/Runner/Assets.xcassets/AppIcon.appiconset
         
 2. Screenshots
-
     Screenshots must be included in upload. Screenshots can be generated automatically using (for
     both android and ios) using https://pub.dartlang.org/packages/screenshots.
 
 1. App Store Icon
-
     iOS Apps must include a 1024x1024px App Store Icon in PNG format.
     
     See https://makeappicon.com/
+
     Store in `ios/fastlane/metadata/app_icon.png`
     
 2. App Store Icon for iPad
-
     Since flutter supports iPad a related app icon is required of exactly '167x167' pixels, in .png format for iOS versions supporting iPad Pro
     
 ## Repo server setup
@@ -306,11 +304,11 @@ Assuming you have an empty remote repo:
 1. Commit files on your local repo
 2. Create a `dev` branch on your local repo
 
-    git checkout -b dev
+        git checkout -b dev
 
 3. Push your local repo to the remote repo.
 
-    git push --set-upstream origin dev
+        git push --set-upstream origin dev
 
 4. On the repo server, it is recommended to set the `master` branch to protected and `dev` as the default branch. This is to prevent accidental manual pushes to the `master` branch.
 
@@ -325,7 +323,7 @@ If your Apple ID under your Apple Developer Account has 2-factor authentication 
 you must create a new Apple ID without 2-factor authentication. This can be done using your
 existing Apple Developer account. See https://appstoreconnect.apple.com/access/users.
 
-You may have to sync your account on Travis and enable the GitHub repo. See: https://travis-ci.org/account/repositories
+To complete the connection between Travis and GitHub, you may have to sync your account on Travis and enable the GitHub repo. See: https://travis-ci.org/account/repositories
 
 Add the following secret variables to your preferred build server (Travis, or GitLab, etc... ):
 
@@ -338,31 +336,25 @@ Add the following secret variables to your preferred build server (Travis, or Gi
     MATCH_PASSWORD
     
    * FASTLANE_USER
-    
         This is your login name to the Apple Developer username. For example, user@email.com.
     
    * FASTLANE_PASSWORD
-    
         This is your Apple Developer password. For travis, if there are special characters the 
         password should be enclosed in single quotes.
         
    * GOOGLE_DEVELOPER_SERVICE_ACCOUNT_ACTOR_FASTLANE
-    
         This is required to login to `Google Play Console`. This is a private key. It should be
         surround with single quotes to be accepted by Travis. It can be generated on 
         https://console.developers.google.com
         
    * KEY_PASSWORD
-    
         This is the password to the encrypted app private key stored in `android/key.jks.enc` and
         the related encrypted properties files stored in `android/key.properties.enc`
         
    * PUBLISHING_MATCH_CERTIFICATE_REPO
-    
         This is the location of the private match repo. For example, https://private.mycompany.com/private_repos/match
      
    * MATCH_PASSWORD
-   
         The password used while setting up match.
         
 ## Local repo setup
@@ -374,7 +366,7 @@ Add an initial semver tag locally as your first version name:
 
 ## Starting a beta
 
-To start a beta
+To start a beta:
 
 Make sure you are in the dev directory in root of repo (and all files are committed and uploaded to remote)
 
