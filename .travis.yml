@@ -4,9 +4,9 @@ jobs:
     # start iOS beta
     - &start_beta
       stage: Start Beta
-      if: branch = dev AND tag IS present
-#      if: branch = dev AND tag = true
 #      if: branch = dev
+#      if: branch = dev AND tag IS present
+      if: branch = dev AND tag = true
 #      tag = true
 #      branches:
 #        only:
@@ -42,8 +42,9 @@ jobs:
 
     # start android beta
     - stage: Start Beta
-      if: branch = dev
-      if: branch = dev AND tag IS present
+#      if: branch = dev
+#      if: branch = dev AND tag IS present
+      if: branch = dev AND tag = true
 #      os: trusty
       env: Deploy beta to android testers
       language: generic
