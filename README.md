@@ -32,7 +32,7 @@ a build server and fastlane.
 
 1. Repository Server    
     The repository server can run any git server, such as GitHub, GitLab, etc. The git tag, in 
-    semver format, is used as the verion name.
+     [semver](https://semver.org/) format, is used as the verion name.
 2. Build Server    
     The build server can be provided by Travis, Cirrus, an internal server running GitLab, Jenkins, etc.. The build server
     should provide a method to get the build number. The build number is used to ensure the release in
@@ -79,6 +79,7 @@ If you have already customized your icons:
     tar cf - android/app/src/main/res ios/Runner/Assets.xcassets | ( cd <location of new project>; tar xf -)
 
 As with any mobile app, the following changes are required.
+
 On android:
 
 1. Update the application id in `android/app/build.gradle`:
@@ -274,11 +275,12 @@ temporarily to run the match setup.
     fastlane match appstore
     ````
     
-   This will create a provisioning profile that will be used during app setup.
+   This will create a provisioning profile that is used during app setup above.
 4. Delete the Matchfile (as it contains secure info)
 
 ### Create required images
 1. Icons
+
     Upload will fail if required icons are missing from the Asset Catalog. To generate a complete set
     of icons from a single image, see https://makeappicon.com. This will generate a complete Asset
     Catalog. Overwrite the existing catalog using:
@@ -286,10 +288,12 @@ temporarily to run the match setup.
         cp <location of downloaded icons>/ios/AppIcon.appiconset/* ios/Runner/Assets.xcassets/AppIcon.appiconset
         
 2. Screenshots
+
     Screenshots must be included in upload. Screenshots can be generated automatically using (for
     both android and ios) using https://pub.dartlang.org/packages/screenshots.
 
 1. App Store Icon
+
     iOS Apps must include a 1024x1024px App Store Icon in PNG format.
     
     See https://makeappicon.com/
@@ -297,6 +301,7 @@ temporarily to run the match setup.
     Store in `ios/fastlane/metadata/app_icon.png`
     
 2. App Store Icon for iPad
+
     Since flutter supports iPad a related app icon is required of exactly '167x167' pixels, in .png format for iOS versions supporting iPad Pro
     
 ## Repo server setup
