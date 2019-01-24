@@ -4,9 +4,9 @@ jobs:
     # start iOS beta
     - &start_beta
       stage: Start Beta
-#      if: branch = dev AND tag IS present
+      if: branch = dev AND tag IS present
 #      if: branch = dev AND tag = true
-      if: branch = dev
+#      if: branch = dev
 #      tag = true
 #      branches:
 #        only:
