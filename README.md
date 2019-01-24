@@ -11,20 +11,21 @@ to both `Google Play Console` and `App Store Connect`.
 Each time a new beta is ready, a 'start beta' command is issued and a new beta is started 
 and automatically released to testers.
 
-Then when ready for general release, a 'release' command is issued and the `dev` branch is automatically 
+Then when beta testing is complete, a 'release' command is issued and the `dev` branch is automatically 
 merged with the `master` branch and the release is uploaded to the `Apple Store` and the 
 Google `Play Store`.
 
 In this way it is guaranteed that:
- 1. An app built for iOS and Android always has the same version name
+ 1. The apps built for iOS and Android always have the same version name
 and build number. 
 2. The build used to pass beta testing is the same build that is shipped to the stores. No rebuild
 required.
-3. Using the version name (or the build number), it is always possible to trace back to the source used in the build.
-    (The build server always records the commit ID used in the build).
-
-Information about the build can be displayed in an About section of the shipped app for support
-and bug fixing.
+3. Using the version name (or the build number), the build can be traced back to the source used in the build.
+    
+    The version name is the git tag, which tags the code used in the build. Alternatively the 
+    build server records the commit ID used in the build next to the build number.
+4. The app name, version name, and build number can be displayed in an About section of the shipped 
+app for support and bug fixing. These values will be the same on both android and ios.
 
 Table of Contents
 =================
@@ -34,7 +35,6 @@ Table of Contents
    * [Implementation](#implementation)
    * [Setup](#setup)
       * [Application Setup](#application-setup)
-   * [version: 1.0.0 1](#version-1001)
       * [Fastlane setup](#fastlane-setup)
       * [Android App Store Connect setup](#android-app-store-connect-setup)
          * [Create new app in store](#create-new-app-in-store)
@@ -47,7 +47,7 @@ Table of Contents
       * [Build server setup](#build-server-setup)
       * [Local repo setup](#local-repo-setup)
    * [Usage](#usage)
-      * [Starting a beta](#starting-a-beta)
+      * [Starting a beta for both android and ios](#starting-a-beta-for-both-android-and-ios)
       * [Release to both stores](#release-to-both-stores)
    * [Issues and Pull Requests](#issues-and-pull-requests)
    * [Todo example](#todo-example)
@@ -414,7 +414,7 @@ Add an initial semver tag locally as your first version name:
     
 # Usage
 
-## Starting a beta
+## Starting a beta for both android and ios
 
 To start a beta:
 
