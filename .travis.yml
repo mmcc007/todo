@@ -43,6 +43,7 @@ jobs:
     # start android beta
     - stage: Start Beta
       if: branch = dev
+      if: branch = dev AND tag IS present
 #      os: trusty
       env: Deploy beta to android testers
       language: generic
