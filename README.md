@@ -4,10 +4,11 @@ Release: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=master)]
 #  CICD for Flutter
 
 CICD is 'Continous Interation and Continous Delivery'. It is the idea of allowing developers
-to focus on developing and reducing time spent on repetitive tasks, such as testing and delivery
-thru automation. For more details see ([CICD](https://en.wikipedia.org/wiki/CI/CD)).
+to focus on developing and reducing time spent on repetitive tasks, such as testing and 
+delivery, using automation. For more details see ([CICD](https://en.wikipedia.org/wiki/CI/CD)).
 
-This is a slightly opinionated approach to CICD that seems to match well with Flutter.
+This particular implementation of CICD is a slightly opinionated approach to CICD that 
+seems to work well with Flutter.
 
 The idea of this implementation of CICD is to do all development in a `dev` branch and when 
 ready for beta, do a beta release
@@ -101,7 +102,7 @@ If you want to do beta testing and releases on demand, it is well worth the effo
 ## Application setup
 
 Decide on an application ID for your app that is unique in both stores. For example, `com.mycompany.todo`. This will be used
-in several places to configure your app.
+in several places to configure this CICD.
 
 If you don't already have the latest (or near latest) version of the project set up, it is 
 recommended that you build a new project and overlay your new project with your existing
@@ -165,7 +166,7 @@ is not currently documented in this README.
 2. Modify metadata to suit your needs.
 
     This includes changing contact information for both android and ios, changing the name of 
-    the app for android and ios (for example, using `MyUniqueAppName`), and may other things.
+    the app for android and ios (for example, using `MyUniqueAppName`), and many other things.
 
     The metadata is found under 'android/fastlane/metadata' and 'ios/fastlane/metadata'.
 
@@ -187,7 +188,7 @@ can be uploaded automatically. Therefore, you should take the following steps:
     
     It is recommended to use the same name in both stores. For example, `MyUniqueAppName`.
 
-4. Provide additional required information `Short Description`, `Long Description`, screenshots, etc...
+4. Provide additional required information 'Short Description', 'Long Description', screenshots, etc...
 
     For icon generation try https://makeappicon.com/, https://pub.dartlang.org/packages/flutter_launcher_icons
     
@@ -286,6 +287,7 @@ Then encrypt them as follows:
         }
     ````
 3. Push key.jks.enc and key.properties.enc and android/app/build.gradle to the source repo.
+
     This can be postponed if remote repo is not yet setup.
 
 
@@ -338,7 +340,7 @@ temporarily to run the match setup.
     fastlane match appstore
     ````
     
-   Among other things, this will create a provisioning profile that is used during app setup above. For example, `match AppStore com.mycompany.todo`. Go back to app setup to complete this step.
+   Among other things, this will create a provisioning profile that is used during app setup above. For example, `match AppStore com.mycompany.todo`. Go back to app setup to complete this step for ios.
 4. Delete the Matchfile (as it contains secure info)
 
 ### Create required images
@@ -392,7 +394,8 @@ the local `dev` branch.
 If your Apple ID under your Apple Developer Account has 2-factor authentication enabled, 
 you must create a new Apple ID without 2-factor authentication. This can be done using your
 existing Apple Developer account. See https://appstoreconnect.apple.com/access/users. It should
-be set to have access to your app in `App Store Connect`. Log out and log back in to complete
+be set to have access to your app in `App Store Connect`. Log out and log back in, using your
+ new Apple ID, to complete
 the setup of your new Apple ID.
 
 To complete the connection between Travis and GitHub, you may have to sync your account on Travis and enable the GitHub repo. See: https://travis-ci.org/account/repositories
@@ -476,11 +479,11 @@ beta testing). A rebuild of the beta-tested build is not required.
 Only the CD (Continous Delivery) part of CICD is currently addressed here. For an example of the
 CI (Continous Integration) part, including unit and integration testing in the cloud, 
 see https://github.com/brianegan/flutter_architecture_samples. Unit testing would be relatively
-easy toadd to this setup. Integration testing involves adding emulators and simulators which 
+easy to add to this setup. Integration testing involves adding emulators and simulators which 
 requires more setup.
 
 # Issues and Pull Requests
-There are several possibilities for improvement. The [happy path](https://en.wikipedia.org/wiki/Happy_path) is working and a few other things. So feedback is welcome.
+There are several possibilities for improvement. Only the [happy path](https://en.wikipedia.org/wiki/Happy_path) is currently working and a few other things. So feedback is very welcome.
 
 # Todo example
 
