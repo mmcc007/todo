@@ -106,12 +106,13 @@ On ios:
     Note: if match is not already set-up you will have to return to this step after match is set-up.
 
 ## Fastlane setup
-Copy the fastlane files from this example to your app. For example
+1. Copy the fastlane files from this example to your app. For example
 
-    cd <location of this app>
-    tar cf - fastlane android/fastlane ios/fastlane script .gitignore .travis.yml .gitlab-ci.yml Gemfile* | ( cd <location of new project>; tar xf -)
+        cd <location of this app>
+        tar cf - fastlane android/fastlane ios/fastlane script .gitignore .travis.yml .gitlab-ci.yml Gemfile* | ( cd <location of new project>; tar xfp -)
     
-and modify metadata to suit your needs.
+2. Modify metadata to suit your needs.
+    This includes changing contact information for both android and ios, changing the name of the app for android, and may other things
 
 Update the `package_name` in `ios/fastlane/Appfile` and `android/fastlane/Appfile` to your 
 application ID. For example:
@@ -329,7 +330,6 @@ Add the following secret variables to your preferred build server (Travis, or Gi
 
     FASTLANE_USER
     FASTLANE_PASSWORD
-    FASTLANE_SESSION
     GOOGLE_DEVELOPER_SERVICE_ACCOUNT_ACTOR_FASTLANE
     KEY_PASSWORD
     PUBLISHING_MATCH_CERTIFICATE_REPO
@@ -344,15 +344,6 @@ Add the following secret variables to your preferred build server (Travis, or Gi
         This is your Apple Developer password. For travis, if there are special characters the 
         password should be enclosed in single quotes.
         
-   * FASTLANE_SESSION
-    
-        You need to generate a login session for your CI machine for your Apple Developer account in advance. You can do this by 
-        running:
-        
-            fastlane spaceauth -u user@email.com
-            
-        For details, see https://github.com/fastlane/fastlane/tree/master/spaceship#2-step-verification
-            
    * GOOGLE_DEVELOPER_SERVICE_ACCOUNT_ACTOR_FASTLANE
     
         This is required to login to `Google Play Console`. This is a private key. It should be
