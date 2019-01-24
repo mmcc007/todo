@@ -83,7 +83,7 @@ ios/Runner.app.dSYM.zip
 /fastlane/README.md
 /fastlane/report.xml
 /fastlane/Preview.html
-android/fastlane/metadata/android/en-US/changelogs
+#android/fastlane/metadata/android/en-US/changelogs/*
 ios/fastlane/metadata/android/en-US/changelogs
 ios/fastlane/Matchfile
 
@@ -93,3 +93,4 @@ ios/fastlane/Matchfile
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+#!android/fastlane/metadata/android/en-US/changelogs/*
