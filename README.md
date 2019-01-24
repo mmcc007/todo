@@ -1,5 +1,5 @@
-Beta: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=dev)](https://travis-ci.org/mmcc007/todo)
 Release: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=master)](https://travis-ci.org/mmcc007/todo)
+Dev: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=dev)](https://travis-ci.org/mmcc007/todo)
 
 #  CICD for Flutter
 
@@ -50,11 +50,11 @@ Table of Contents
    * [Setup](#setup)
       * [Application setup](#application-setup)
       * [Fastlane setup](#fastlane-setup)
-      * [Android App Store Connect setup](#android-app-store-connect-setup)
+      * [Google Play Console setup](#google-play-console-setup)
          * [Create new app in store](#create-new-app-in-store)
          * [Sign android app](#sign-android-app)
          * [Upload first apk](#upload-first-apk)
-      * [App Store Connect setup](#app-store-connect-setup)
+      * [Apple App Store Connect setup](#apple-app-store-connect-setup)
          * [Sign ios app](#sign-ios-app)
          * [Create required images](#create-required-images)
       * [Repo server setup](#repo-server-setup)
@@ -176,7 +176,7 @@ application ID. For example:
         package_name("com.mycompany.todo")
 
 
-## Android App Store Connect setup
+## Google Play Console setup
 `App Store Connect` requires that the application be set-up before builds
 can be uploaded automatically. Therefore, you should take the following steps:
 
@@ -197,6 +197,9 @@ can be uploaded automatically. Therefore, you should take the following steps:
     For Feature Graphic generation see https://www.norio.be/android-feature-graphic-generator/
 
 5. When all necessary information is provided, click on `Save Draft`. 
+1. Complete Content Rating
+1. Complete Pricing and Distribution
+
 
 ### Sign android app
 An android app requires signing. This is implemented using a private key that you generate yourself.
@@ -299,7 +302,7 @@ Upload the first apk manually (this is required so `App Store Connect` knows the
 3. Click on `Browse Files` to upload the current apk (built with `flutter build apk`) from `build/app/outputs/apk/release/app-release.apk`.
 4. Discard the beta track using the `Discard` button
 
-## App Store Connect setup
+## Apple App Store Connect setup
 The equivalent steps for the android store have to be taken for the iOS store.
 
 ### Sign ios app
@@ -386,7 +389,10 @@ Assuming you have an empty remote repo:
 
 After this point
 the remote `master` should be protected and should never be pushed-to manually. There should never
-be a reason to even checkout the local `master` branch locally. All CICD commands should be issued from
+be a reason to even checkout the local `master` branch locally. 
+For example, see https://help.github.com/articles/setting-the-default-branch and https://help.github.com/articles/configuring-protected-branches.
+
+All CICD commands should be issued from
 the local `dev` branch.
 
 ## Build server setup
@@ -474,6 +480,9 @@ the remote `master`. This will
 trigger the build server to promote each build used in beta testing to a release in both stores. 
 The remote `master` now contains the most current code (the code used in the build that went thru
 beta testing). A rebuild of the beta-tested build is not required.
+
+Note: currently auto-release is disabled in both stores. So the last step to release will have to
+be completed manually for each store.
 
 # The CI part of CICD
 Only the CD (Continous Delivery) part of CICD is currently addressed here. For an example of the

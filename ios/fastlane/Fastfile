@@ -91,7 +91,10 @@ platform :ios do
     #ensure_git_branch(branch: 'master')
     #build_release
     #upload_to_app_store(force: true, precheck_include_in_app_purchases: false)
-    upload_to_app_store(
+    get_build_name_and_build_number
+    #upload_to_app_store(
+    deliver(
+      build_number: @build_number,
       submit_for_review: false,
       automatic_release: true,
       force: true, # Skip HTMl report verification
@@ -99,25 +102,27 @@ platform :ios do
       #skip_screenshots: true,
       skip_screenshots: false,
       skip_binary_upload: true,
+      price_tier: 0,
+      app_rating_config_path: "fastlane/rating_config.json",
       # Comes from https://github.com/fastlane/fastlane/issues/5542#issuecomment-254201994
-      submission_information: {
-        #add_id_info_limits_tracking: false,
-        #add_id_info_serves_ads: false,
-        #add_id_info_tracks_action: false,
-        #add_id_info_tracks_install: false,
-        #add_id_info_uses_idfa: false,
-        #content_rights_has_rights: true,
-        #content_rights_contains_third_party_content: true,
-        export_compliance_platform: 'ios',
-        export_compliance_compliance_required: false,
-        export_compliance_encryption_updated: false,
-        export_compliance_app_type: nil,
-        export_compliance_uses_encryption: false,
-        export_compliance_is_exempt: false,
-        export_compliance_contains_third_party_cryptography: false,
-        export_compliance_contains_proprietary_cryptography: false,
-        export_compliance_available_on_french_store: false
-      }
+#      submission_information: {
+#        #add_id_info_limits_tracking: false,
+#        #add_id_info_serves_ads: false,
+#        #add_id_info_tracks_action: false,
+#        #add_id_info_tracks_install: false,
+#        #add_id_info_uses_idfa: false,
+#        #content_rights_has_rights: true,
+#        #content_rights_contains_third_party_content: true,
+#        export_compliance_platform: 'ios',
+#        export_compliance_compliance_required: false,
+#        export_compliance_encryption_updated: false,
+#        export_compliance_app_type: nil,
+#        export_compliance_uses_encryption: false,
+#        export_compliance_is_exempt: false,
+#        export_compliance_contains_third_party_cryptography: false,
+#        export_compliance_contains_proprietary_cryptography: false,
+#        export_compliance_available_on_french_store: false
+#      }
     )
   end
 
