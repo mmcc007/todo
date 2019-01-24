@@ -16,15 +16,41 @@ merged with the `master` branch and the release is uploaded to the `Apple Store`
 Google `Play Store`.
 
 In this way it is guaranteed that:
- 1. An app build for iOS and Android always has the same version name
+ 1. An app built for iOS and Android always has the same version name
 and build number. 
 2. The build used to pass beta testing is the same build that is shipped to the stores. No rebuild
 required.
-3. The source of a build can always be traced back from the build number.
+3. Using the version name (or the build number), it is always possible to trace back to the source used in the build.
+    (The build server always records the commit ID used in the build).
 
 Information about the build can be displayed in an About section of the shipped app for support
 and bug fixing.
 
+Table of Contents
+=================
+
+   * [CICD for Flutter](#cicd-for-flutter)
+   * [Implementation](#implementation)
+   * [Setup](#setup)
+      * [Application Setup](#application-setup)
+   * [version: 1.0.0 1](#version-1001)
+      * [Fastlane setup](#fastlane-setup)
+      * [Android App Store Connect setup](#android-app-store-connect-setup)
+         * [Create new app in store](#create-new-app-in-store)
+         * [Sign android app](#sign-android-app)
+         * [Upload first apk](#upload-first-apk)
+      * [App Store Connect setup](#app-store-connect-setup)
+         * [Sign ios app](#sign-ios-app)
+         * [Create required images](#create-required-images)
+      * [Repo server setup](#repo-server-setup)
+      * [Build server setup](#build-server-setup)
+      * [Local repo setup](#local-repo-setup)
+   * [Usage](#usage)
+      * [Starting a beta](#starting-a-beta)
+      * [Release to both stores](#release-to-both-stores)
+   * [Issues and Pull Requests](#issues-and-pull-requests)
+   * [Todo example](#todo-example)
+   
 # Implementation
 
 The 'start beta' and 'release' commands mentioned above are implemented using a combination of a repository server, 
@@ -39,20 +65,23 @@ a build server and fastlane.
     both stores can be related back to the source code that was used to generate the app.    
 3. Fastlane    
     Fastlane plays two roles: 
-    1. To build and upload the ios and android app.    
+    1. To build the ios and android apps and upload them to the respective stores.    
         This occurs on the build server.
     1. To implement the `start_beta` and `release` command    
-        This occurs on the local machine and triggers processes on the build server.
+        This occurs on the local machine and triggers the corresponding processes on the build server.
         
+As an optional sanity test, before setting-up CICD for your own app, clone this repo and deploy it
+by following all the setup steps.
+
 # Setup
 
 There are a lot of setup steps to take to get this working. But keep in mind that this only has
 to be done once. 
 
-Many of these steps have to be taken anyway to release an app. So I figured, may as well gather
+Many of these steps have to be taken anyway to release an app. So I figured... may as well gather
 all these steps into one place and add some automation!
 
-If you want to make releases on demand, it is well worth the effort!
+If you want to do beta testing and releases on demand, it is well worth the effort!
 
 ## Application Setup
 
@@ -69,7 +98,7 @@ project code. For example:
 
 This is to avoid problems with auto-incrementing the version name for older projects.
 
-To enable CICD-managed revision control comment out the `version` in pubspec.yaml
+To enable CICD-managed version control comment out the `version` in pubspec.yaml
 
     # version: 1.0.0+1
 
@@ -97,7 +126,7 @@ On ios:
         open ios/Runner.xcworkspace
     
 1. Using XCode update the `Display Name` to the name the user will see.
-2. Using XCode update the `Bundle Identifier` to the same as the application id used on android, eg, 'com.mycompany.todo'.
+2. Using XCode update the `Bundle Identifier` to the same as the application id used on android, eg, `com.mycompany.todo`.
 
     `Version` and `Build` can be ignored. These are updated automatically by the CICD.
 3. Disable automatic signing
@@ -112,10 +141,13 @@ On ios:
 1. Copy the fastlane files from this example to your app. For example
 
         cd <location of this repo>
-        tar cf - fastlane android/fastlane ios/fastlane script .gitignore .travis.yml .gitlab-ci.yml Gemfile* | ( cd <location of new project>; tar xfp -)
+        tar cf - fastlane android/fastlane ios/fastlane script .gitignore .travis.yml .gitlab-ci.yml Gemfile* | ( cd <location of new project>; tar xf -)
     
 2. Modify metadata to suit your needs.
-    This includes changing contact information for both android and ios, changing the name of the app for android and ios, and may other things.
+    This includes changing contact information for both android and ios, changing the name of 
+    the app for android and ios (for example, using `MyUniqueAppName`), and may other things.
+
+    The metadata is found under 'android/fastlane/metadata' and 'ios/fastlane/metadata'.
 
 3. Update the `package_name` in `ios/fastlane/Appfile` and `android/fastlane/Appfile` to your 
 application ID. For example:
@@ -131,7 +163,9 @@ can be uploaded automatically. Therefore, you should take the following steps:
     
 1. Go to `App Store Connect` (https://play.google.com/apps/publish)
  
-3. Click on `Create Application` and provide a title for your app. For example, `Todo`.
+3. Click on `Create Application` and provide a title for your app. 
+    
+    It is recommended to use the same name in both stores. For example, `MyUniqueAppName`.
 
 4. Provide additional required information `Short Description`, `Long Description`, screenshots, etc...
 
@@ -152,8 +186,7 @@ However, to automate the build, the CICD needs access to this private key.
 This CICD expects to find a password protected encrypted version of the private key in the repo. The
 password to unencrypt the private key is provided in the `KEY_PASSWORD` described below.
 
-Follow the directions at https://developer.android.com/studio/publish/app-signing to learn about
-app signing.
+To learn more about app signing see: https://developer.android.com/studio/publish/app-signing.
  
 1. If you do not already have a keystore, generate a new keystore:
 
@@ -176,8 +209,11 @@ Then encrypt them as follows:
     
 2. Encrypt both files with:
     
+        KEY_PASSWORD=<my secret key password>
         openssl enc -aes-256-cbc -salt -in android/key.jks -out android/key.jks.enc -k $KEY_PASSWORD
         openssl enc -aes-256-cbc -salt -in android/key.properties -out android/key.properties.enc -k $KEY_PASSWORD
+    
+    Remember value of `KEY_PASSWORD` for use in build server setup.
 
 3. Enable android release builds in `android/app/build.gradle`:
     
@@ -230,6 +266,7 @@ Then encrypt them as follows:
         }
     ````
 3. Push key.jks.enc and key.properties.enc and android/app/build.gradle to the source repo.
+    This can be postponed if remote repo is not yet setup.
 
 
 ### Upload first apk
@@ -262,12 +299,18 @@ temporarily to run the match setup.
     fastlane match init
     ````
     
-2. Create your provisioning profile and app. 
-    You will have to pick a unique name for the app for end users
+    This creates a (temporary) file at ios/fastlane/Matchfile.
+    
+2. Create your app in `App Store Connect`. 
+
+    You will be asked for a unique name for the app for end users during this step. It is 
+    recommended to use the same name in both stores. For example, `MyUniqueAppName`.
 
     ````
-    fastlane produce -u user@email.com -a com.mycompany.todo
+    fastlane produce -u user@email.com -a com.mycompany.todo -q MyUniqueAppName
     ````
+    
+    See https://docs.fastlane.tools/actions/produce for details.
     
 3. Sync the match repo with the app store.
 
@@ -275,7 +318,7 @@ temporarily to run the match setup.
     fastlane match appstore
     ````
     
-   This will create a provisioning profile that is used during app setup above.
+   Among other things, this will create a provisioning profile that is used during app setup above. For example, `match AppStore com.mycompany.todo`.
 4. Delete the Matchfile (as it contains secure info)
 
 ### Create required images
@@ -289,7 +332,7 @@ temporarily to run the match setup.
         
 2. Screenshots
 
-    Screenshots must be included in upload. Screenshots can be generated automatically using (for
+    Screenshots must be included in upload. Screenshots can be generated automatically (for
     both android and ios) using https://pub.dartlang.org/packages/screenshots.
 
 1. App Store Icon
@@ -302,7 +345,7 @@ temporarily to run the match setup.
     
 2. App Store Icon for iPad
 
-    Since flutter supports iPad a related app icon is required of exactly '167x167' pixels, in .png format for iOS versions supporting iPad Pro
+    Since flutter supports iPad a related app icon is required of exactly '167x167' pixels, in .png format for iOS versions supporting iPad Pro (which is all flutter apps).
     
 ## Repo server setup
 Assuming you have an empty remote repo:
@@ -326,7 +369,8 @@ the local `dev` branch.
 
 If your Apple ID under your Apple Developer Account has 2-factor authentication enabled, 
 you must create a new Apple ID without 2-factor authentication. This can be done using your
-existing Apple Developer account. See https://appstoreconnect.apple.com/access/users.
+existing Apple Developer account. See https://appstoreconnect.apple.com/access/users. It should
+be set to have access to your app in `App Store Connect`.
 
 To complete the connection between Travis and GitHub, you may have to sync your account on Travis and enable the GitHub repo. See: https://travis-ci.org/account/repositories
 
@@ -341,16 +385,16 @@ Add the following secret variables to your preferred build server (Travis, or Gi
     MATCH_PASSWORD
     
    * FASTLANE_USER
-        This is your login name to the Apple Developer username. For example, user@email.com.
+        This is your Apple ID (without 2-factor authentication). For example, user@email.com.
     
    * FASTLANE_PASSWORD
-        This is your Apple Developer password. For travis, if there are special characters the 
+        This is your Apple ID password. For travis, if there are special characters the 
         password should be enclosed in single quotes.
         
    * GOOGLE_DEVELOPER_SERVICE_ACCOUNT_ACTOR_FASTLANE
         This is required to login to `Google Play Console`. This is a private key. It should be
         surround with single quotes to be accepted by Travis. It can be generated on 
-        https://console.developers.google.com
+        https://console.developers.google.com. Note: this should never be included in your repo.
         
    * KEY_PASSWORD
         This is the password to the encrypted app private key stored in `android/key.jks.enc` and
@@ -373,19 +417,19 @@ Add an initial semver tag locally as your first version name:
 
 To start a beta:
 
-Make sure you are in the dev directory in root of repo (and all files are committed and uploaded to remote)
+Make sure you are in the dev directory in root of repo (and all files are committed and uploaded to remote). Then enter:
 
     fastlane start_beta
 
 
-This will push the committed code in the local `dev` to the remote `dev`, increment the semver version number and generate a tag and trigger a build of the app 
-for ios and android and release the beta to testers 
+This will increment the semver version name, generate a git tag, and push the committed code in the local `dev` to the remote `dev`. This push will trigger the build server to build the app 
+for ios and android and deploy each build to beta testers 
 automatically on both stores.
 
-When ready to start a new beta
-simply re-issue the command.
+When ready to start a new beta simply merge the code for the next beta to the local `dev` and
+re-issue the command.
 
-Semver can be incremented using:
+The semver version name can be incremented using:
 
     fastlane start_beta patch (the default)
     fastlane start_beta minor
@@ -393,7 +437,7 @@ Semver can be incremented using:
     
 ## Release to both stores
 
-To release to both stores, from root of repo enter:
+To release to both stores, from root of local repo, in the `dev` branch, enter:
 
     fastlane release
 
@@ -401,8 +445,13 @@ To release to both stores, from root of repo enter:
 This will confirm that the local `dev` is committed locally and as a precaution it confirms that no
 push is required from the local `dev` to the remote `dev`. Then it will merge the remote `dev` to 
 the remote `master`. This will 
-trigger the build server to promote the build used in beta testing to a release in both stores. 
-The remote `master` now contains the most current code. A rebuild of the beta-tested build is not required.
+trigger the build server to promote each build used in beta testing to a release in both stores. 
+The remote `master` now contains the most current code (the code used in the build that went thru
+beta testing). A rebuild of the beta-tested build is not required.
+
+# Issues and Pull Requests
+There are several possibilities for improvement. So feedback is welcome.
+
 
 # Todo example
 

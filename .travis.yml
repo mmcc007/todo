@@ -12,9 +12,9 @@ jobs:
         only:
           #- dev
           - /^(\d*).(\d*).(\d*)$/
-        except:
-          - dev
-          - master
+#        except:
+#          - dev
+#          - master
       os: osx
 #      osx_image: xcode8.0
       language: generic
@@ -50,9 +50,9 @@ jobs:
         only:
           #- dev
           - /^(\d*).(\d*).(\d*)$/
-        except:
-          - dev
-          - master
+#        except:
+#          - dev
+#          - master
 #      os: trusty
       env: Deploy beta to android testers
       language: generic
