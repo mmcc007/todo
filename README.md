@@ -30,9 +30,11 @@ Table of Contents
 =================
 
    * [CICD for Flutter](#cicd-for-flutter)
+   * [Table of Contents](#table-of-contents)
    * [Implementation](#implementation)
    * [Setup](#setup)
       * [Application Setup](#application-setup)
+   * [version: 1.0.0 1](#version-1001)
       * [Fastlane setup](#fastlane-setup)
       * [Android App Store Connect setup](#android-app-store-connect-setup)
          * [Create new app in store](#create-new-app-in-store)
