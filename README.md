@@ -1,6 +1,9 @@
 Release: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=master)](https://travis-ci.org/mmcc007/todo)
 Dev: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=dev)](https://travis-ci.org/mmcc007/todo)
 
+
+[![GitErDone](https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=com.orbsoft.todo)
+
 #  CICD for Flutter
 
 CICD is 'Continous Interation and Continous Delivery'. It is the idea of allowing developers
