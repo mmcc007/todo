@@ -7,7 +7,8 @@ jobs:
 #      if: branch = dev
 #      if: branch = dev AND tag IS present
 #      if: branch = dev AND tag = true
-      if: branch = /^(\d*).(\d*).(\d*)$/
+#      if: branch = /^(\d*).(\d*).(\d*)$/
+      if: tag = true
 #      branches:
 #        only:
 ##          - dev
@@ -45,7 +46,8 @@ jobs:
     - stage: Start Beta
 #      if: branch = dev
 #      if: branch = dev AND tag IS present
-      if: branch = /^(\d*).(\d*).(\d*)$/
+#      if: branch = /^(\d*).(\d*).(\d*)$/
+      if: tag = true
 #      if: branch = dev AND tag = true
 #      branches:
 #        only:
