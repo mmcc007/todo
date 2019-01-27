@@ -10,11 +10,11 @@ jobs:
 #      tag = true
       branches:
         only:
-          - dev
-          - /^(\d*).(\d*).(\d*)$/
-#        except:
 #          - dev
-#          - master
+          - /^(\d*).(\d*).(\d*)$/
+        except:
+          - dev
+          - master
       os: osx
 #      osx_image: xcode8.0
       language: generic
@@ -45,14 +45,15 @@ jobs:
     - stage: Start Beta
 #      if: branch = dev
 #      if: branch = dev AND tag IS present
+#      if: branch = /^(\d*).(\d*).(\d*)$/
 #      if: branch = dev AND tag = true
       branches:
         only:
-          - dev
-          - /^(\d*).(\d*).(\d*)$/
-#        except:
 #          - dev
-#          - master
+          - /^(\d*).(\d*).(\d*)$/
+        except:
+          - dev
+          - master
 #      os: trusty
       env: Deploy beta to android testers
       language: generic
