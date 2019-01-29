@@ -12,6 +12,7 @@ import 'package:vanilla/widgets/filter_button.dart';
 import 'package:vanilla/widgets/stats_counter.dart';
 import 'package:vanilla/widgets/todo_list.dart';
 import 'package:vanilla/widgets/typedefs.dart';
+import 'package:package_info/package_info.dart';
 
 class HomeScreen extends StatefulWidget {
   final AppState appState;
@@ -40,6 +41,18 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   VisibilityFilter activeFilter = VisibilityFilter.all;
   AppTab activeTab = AppTab.todos;
+  PackageInfo _packageInfo = new PackageInfo(
+    appName: 'Unknown',
+    packageName: 'Unknown',
+    version: 'Unknown',
+    buildNumber: 'Unknown',
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _initPackageInfo();
+  }
 
   _updateVisibility(VisibilityFilter filter) {
     setState(() {
@@ -53,11 +66,58 @@ class HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("About " + VanillaLocalizations().appTitle),
+          content: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              _infoTile('App name', _packageInfo.appName),
+              _infoTile('Package name', _packageInfo.packageName),
+              _infoTile('App version', _packageInfo.version),
+              _infoTile('Build number', _packageInfo.buildNumber),
+            ],
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<Null> _initPackageInfo() async {
+    final PackageInfo info = await PackageInfo.fromPlatform();
+    setState(() {
+      _packageInfo = info;
+    });
+  }
+
+  Widget _infoTile(String title, String subtitle) {
+    return new ListTile(
+      title: new Text(title),
+      subtitle: new Text(subtitle ?? 'Not set'),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(VanillaLocalizations.of(context).appTitle),
+        title: GestureDetector(
+            onTap: () {
+              _showDialog();
+            },
+            child: Text(VanillaLocalizations.of(context).appTitle)),
         actions: [
           FilterButton(
             isActive: activeTab == AppTab.todos,
