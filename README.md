@@ -5,11 +5,11 @@ Dev: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=dev)](https:
 
 #  CICD example for Flutter
 
-This is a example of using fcicd to manage CICD pipelines for Flutter. 
+This is a example of using [fledge](https://github.com/mmcc007/fledge) to manage CICD pipelines for Flutter. 
 
 You can see details of the build by clicking on one of the Travis badges above.
 
-See fcicd for details.
+See [fledge](https://github.com/mmcc007/fledge) for details.
 
 # Todo example
 
