@@ -1,5 +1,5 @@
-Release: [![Build Status](https://travis-ci.org/mmcc007/giterdone.svg?branch=master)](https://travis-ci.org/mmcc007/giterdone)
-Dev: [![Build Status](https://travis-ci.org/mmcc007/giterdone.svg?branch=dev)](https://travis-ci.org/mmcc007/giterdone)
+Release: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=master)](https://travis-ci.org/mmcc007/todo)
+Dev: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=dev)](https://travis-ci.org/mmcc007/todo)
 
 <a href="https://play.google.com/store/apps/details?id=com.orbsoft.todo"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="40%" title="GitErDone" alt="GitErDone"></a>
 

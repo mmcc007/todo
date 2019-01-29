@@ -8,7 +8,7 @@ dependencies:
   flutter:
     sdk: flutter
   todos_repository:
-    path: ../todos_repository
+    path: ../../pkg/todos_repository
   rxdart: 0.18.0
 
 dev_dependencies:
