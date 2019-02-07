@@ -71,6 +71,9 @@ class VanillaAppState extends State<VanillaApp> {
         },
       },
       debugShowCheckedModeBanner: false,
+      locale: const Locale('en', 'US'),
+      supportedLocales: const <Locale>[Locale('en', 'US')],
+      localeResolutionCallback: (x, y) => const Locale('en', 'US'),
     );
   }
 

@@ -8,14 +8,15 @@ staging: /tmp/screenshots
 
 # A list of locales supported in app
 locales:
+  - fr-CA
   - en-US
 #  - de-DE
 
 # A list of devices to emulate
 devices:
   ios:
-#    - iPhone X
-    - iPhone 7 Plus
+    - iPhone X
+#    - iPhone 7 Plus
 #   "iPhone 6",
 #   "iPhone 6 Plus",
 #   "iPhone 5",
@@ -23,7 +24,8 @@ devices:
 #   "iPad Retina",
 #   "iPad Pro"
   android:
-    - Nexus 5X
+#    - Nexus 5X
+#    - Nexus 6P
 
 # Frame screenshots
 frame: true

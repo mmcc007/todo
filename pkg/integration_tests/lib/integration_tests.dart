@@ -12,7 +12,7 @@ import 'package:test/test.dart';
 import 'page_objects/page_objects.dart';
 
 main() {
-  final Map config = Config('config.yaml').config;
+  final Map config = Config().config;
   int screenshotCount = 0;
 
   group('Todo App Test', () {
