@@ -15,7 +15,7 @@ locales:
 # A list of devices to emulate
 devices:
   ios:
-    - iPhone X
+#    - iPhone X
 #    - iPhone 7 Plus
 #   "iPhone 6",
 #   "iPhone 6 Plus",
@@ -25,7 +25,7 @@ devices:
 #   "iPad Pro"
   android:
 #    - Nexus 5X
-#    - Nexus 6P
+    - Nexus 6P
 
 # Frame screenshots
 frame: true
