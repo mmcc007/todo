@@ -12,7 +12,7 @@ class VanillaLocalizations {
         context, VanillaLocalizations);
   }
 
-  String get appTitle => "Todo";
+  String get appTitle => "GitErDone";
 }
 
 class VanillaLocalizationsDelegate
