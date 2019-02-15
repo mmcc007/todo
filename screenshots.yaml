@@ -1,21 +1,21 @@
 # Screen capture tests
 tests:
   - test_driver/todo_app.dart
-#  - main2.dart
 
-# Interim location of screenshots from tests before processing (defaults to ./screenshots)
+# Interim location of screenshots from tests before processing
 staging: /tmp/screenshots
 
 # A list of locales supported in app
 locales:
-  - fr-CA
+#  - fr-CA
   - en-US
 #  - de-DE
 
 # A list of devices to emulate
 devices:
   ios:
-#    - iPhone X
+    - iPhone X
+    - iPad Pro (12.9-inch) (2nd generation)
 #    - iPhone 7 Plus
 #   "iPhone 6",
 #   "iPhone 6 Plus",
@@ -29,8 +29,3 @@ devices:
 
 # Frame screenshots
 frame: true
-
-## final destination of processed screenshots
-#dest:
-#  ios: /tmp/ios
-#  android: /tmp/android
