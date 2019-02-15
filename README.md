@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/mmcc007/todo.svg)](https://travis-ci.org/mmcc007/todo)
 
 
-[![GitErDone](https://play.google.com/intl/en_us/badges/images/badge_new.png)](https://pub.dartlang.org/packages/fledge)
-[![GitErDone](https://linkmaker.itunes.apple.com/assets/shared/badges/en-us/appstore-lrg-25178aeef6eb6b83b96f5f2d004eda3bffbb37122de64afbaef7107b384a4132.svg)](https://pub.dartlang.org/packages/fledge)
+[![GitErDone](https://play.google.com/intl/en_us/badges/images/badge_new.png)](https://play.google.com/store/apps/details?id=com.orbsoft.todo)
+[![GitErDone](https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg)](https://itunes.apple.com/us/app/giterdone/id1450240301)
 
 #  CICD example for Flutter
 
