@@ -8,7 +8,7 @@
 
 This is a example of using [fledge](https://github.com/mmcc007/fledge) to manage CICD pipelines for Flutter. 
 
-You can see details of the build by clicking on one of the Travis badges above.
+You can see details of the beta and release builds by clicking on the Travis badge above.
 
 See [fledge](https://github.com/mmcc007/fledge) for details.
 
