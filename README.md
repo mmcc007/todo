@@ -1,7 +1,8 @@
-Release: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=master)](https://travis-ci.org/mmcc007/todo)
-Dev: [![Build Status](https://travis-ci.org/mmcc007/todo.svg?branch=dev)](https://travis-ci.org/mmcc007/todo)
+[![Build Status](https://travis-ci.org/mmcc007/todo.svg)](https://travis-ci.org/mmcc007/todo)
 
-<a href="https://play.google.com/store/apps/details?id=com.orbsoft.todo"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="40%" title="GitErDone" alt="GitErDone"></a>
+
+[![GitErDone](https://play.google.com/intl/en_us/badges/images/badge_new.png)](https://pub.dartlang.org/packages/fledge)
+[![GitErDone](https://linkmaker.itunes.apple.com/assets/shared/badges/en-us/appstore-lrg-25178aeef6eb6b83b96f5f2d004eda3bffbb37122de64afbaef7107b384a4132.svg)](https://pub.dartlang.org/packages/fledge)
 
 #  CICD example for Flutter
 
