@@ -2,7 +2,7 @@
 
 
 [![GitErDone](https://play.google.com/intl/en_us/badges/images/badge_new.png)](https://play.google.com/store/apps/details?id=com.orbsoft.todo)
-[![GitErDone](https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg)](https://itunes.apple.com/us/app/giterdone/id1450240301)
+[![GitErDone](https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2019-02-15&kind=iossoftware)](https://itunes.apple.com/us/app/giterdone/id1450240301)
 
 #  CICD example for Flutter
 
