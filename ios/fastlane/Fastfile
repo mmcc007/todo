@@ -56,11 +56,15 @@ platform :ios do
     }
     puts 'Certificates and profiles installed'
 
+  app_identifier=CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+  puts "app_identifier: #{app_identifier}"
+  profile_name='sigh_' + app_identifier + '_appstore_profile-path'
+
     update_project_provisioning(
       xcodeproj: 'Runner.xcodeproj',
       target_filter: 'Runner',
       build_configuration: 'Release',
-      profile: ENV['sigh_com.orbsoft.todo_appstore_profile-path'],
+      profile: ENV[profile_name],
     )
   end
 
